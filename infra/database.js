@@ -23,7 +23,7 @@ async function query(queryObject) {
     return result;
   } catch (error) {
     console.log("Error executing query:", error);
-    throw errorr;
+    throw error;
   } finally {
     await client.end();
   }
