@@ -1,12 +1,15 @@
-let response; // O let é necessário para permitir a reatribuição de valores às variáveis após a execução do fetch dentro do beforeAll
+import orchestrator from "tests/orchestrator.js";
+
 let responseBody;
 let database;
+let response; // O let é necessário para permitir a reatribuição de valores às variáveis após a execução do fetch dentro do beforeAll
+
 beforeAll(async () => {
+  await orchestrator.waitForAllServices();
   response = await fetch("http://localhost:3000/api/v1/status");
   responseBody = await response.json();
   database = responseBody.dependencies.database;
 });
-// O beforeAll é uma função de setup de testes que executa um bloco de código uma única vez antes de todos os testes em um determinado arquivo ou suíte de testes.
 
 test("GET to /api/v1/status should return 200", async () => {
   expect(response.status).toBe(200);
