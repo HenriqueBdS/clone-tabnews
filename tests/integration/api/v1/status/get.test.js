@@ -33,7 +33,7 @@ test("Return max connections", async () => {
   expect(database.max_connections).toBe(100);
 });
 
-test("Return opened connections ", async () => {
+test("Return opened connections", async () => {
   expect(database.opened_connections).toBeDefined();
   expect(typeof database.opened_connections).toBe("number");
   expect(database.opened_connections).toEqual(1);
