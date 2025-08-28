@@ -21,7 +21,7 @@ test("POST to /api/v1/migrations should return 200", async () => {
     "http://localhost:3000/api/v1/migrations",
     {
       method: "POST",
-    }
+    },
   );
   expect(secondResponse.status).toBe(200);
 
