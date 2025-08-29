@@ -4,7 +4,7 @@
   "description": "Um projeto para estudo do https://curso.dev",
   "main": "index.js",
   "scripts": {
-    "dev": "npm run services:up && npm run services:wait:database && npm run migrations:up && next dev",
+    "dev": "node infra/scripts/dev-cleanup.js",
     "test": "npm run services:up && concurrently --names next,jest --hide next -k -s command-jest \"next dev\" \"jest --runInBand --verbose\"",
     "posttest": "npm run services:stop",
     "test:watch": "jest --watchAll --runInBand",
