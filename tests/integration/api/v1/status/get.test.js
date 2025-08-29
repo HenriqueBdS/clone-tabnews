@@ -11,30 +11,36 @@ beforeAll(async () => {
   database = responseBody.dependencies.database;
 });
 
-test("GET to /api/v1/status should return 200", async () => {
-  expect(response.status).toBe(200);
-});
+describe("GET /api/v1/status", () => {
+  describe("Anonymous user", () => {
+    describe("Retieving current system status", () => {
+      test("Return status code 200", async () => {
+        expect(response.status).toBe(200);
+      });
 
-test("Return update_at in ISO format", async () => {
-  expect(responseBody.update_at).toBeDefined();
-  const parsedUpdateAt = new Date(responseBody.update_at).toISOString();
-  expect(responseBody.update_at).toEqual(parsedUpdateAt);
-});
+      test("Return update_at in ISO format", async () => {
+        expect(responseBody.update_at).toBeDefined();
+        const parsedUpdateAt = new Date(responseBody.update_at).toISOString();
+        expect(responseBody.update_at).toEqual(parsedUpdateAt);
+      });
 
-test("Return Postgres version", async () => {
-  expect(database.version).toBeDefined();
-  expect(typeof database.version).toBe("string");
-  expect(database.version).toMatch("16.0");
-});
+      test("Return Postgres version", async () => {
+        expect(database.version).toBeDefined();
+        expect(typeof database.version).toBe("string");
+        expect(database.version).toMatch("16.0");
+      });
 
-test("Return max connections", async () => {
-  expect(database.max_connections).toBeDefined();
-  expect(typeof database.max_connections).toBe("number");
-  expect(database.max_connections).toBe(100);
-});
+      test("Return max connections", async () => {
+        expect(database.max_connections).toBeDefined();
+        expect(typeof database.max_connections).toBe("number");
+        expect(database.max_connections).toBe(100);
+      });
 
-test("Return opened connections", async () => {
-  expect(database.opened_connections).toBeDefined();
-  expect(typeof database.opened_connections).toBe("number");
-  expect(database.opened_connections).toEqual(1);
+      test("Return opened connections", async () => {
+        expect(database.opened_connections).toBeDefined();
+        expect(typeof database.opened_connections).toBe("number");
+        expect(database.opened_connections).toEqual(1);
+      });
+    });
+  });
 });
